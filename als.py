@@ -6,7 +6,7 @@ n_users = 610
 n_movies = 193609
 
 def read_csv(filename):
-    data = dict()
+    data = []
     with open(filename, "r") as f:
         reader = csv.reader(f)
         for r in reader:
@@ -49,6 +49,7 @@ class ALSModel:
         updated_user_vector = self._als_step(rating_vector, user_vector, self.movie_matrix)
         self.user_matrix[userId] = updated_user_vector
         self.ratings[userId] = rating_vector
+        return updated_user_vector
 
     def predict(self, userId, movieId):
         user_vector = self.user_matrix[userId] 
